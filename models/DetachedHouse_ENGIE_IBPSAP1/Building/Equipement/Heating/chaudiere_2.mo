@@ -105,12 +105,6 @@ parameter Modelica.SIunits.Volume VWat=1.5E-6*chaudiere.Q_flow_nominal
       description="Boiler pump electrical power consumption",
     y(unit="W"))
     annotation (Placement(transformation(extent={{80,-40},{100,-20}})));
-  IBPSA.Utilities.IO.SignalExchange.Overwrite oveBoi(description="Boiler control signal",
-      u(
-      min=0,
-      max=1,
-      unit="1"))
-    annotation (Placement(transformation(extent={{-60,46},{-40,66}})));
   Modelica.Blocks.Sources.RealExpression QWat_flow(y=chaudiere.QWat_flow)
     annotation (Placement(transformation(extent={{16,80},{62,100}})));
   IBPSA.Utilities.IO.SignalExchange.Read reaHeaBoi(
@@ -119,6 +113,12 @@ parameter Modelica.SIunits.Volume VWat=1.5E-6*chaudiere.Q_flow_nominal
     y(unit="W"))
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
 
+  IBPSA.Utilities.IO.SignalExchange.Subcontroller subCon(description=
+        "Heating released from the boiler to the distribution fluid", u(
+      min=0,
+      max=8000,
+      unit="W"))
+    annotation (Placement(transformation(extent={{-60,46},{-40,66}})));
 equation
 
 //  QFue_flow = chaudiere.QFue_flow;
@@ -161,12 +161,14 @@ equation
           {-60,-84},{2,-84}}, color={255,0,255}));
   connect(multiSum.y,reaPpum. u) annotation (Line(points={{51.02,-62},{58,-62},
           {58,-30},{78,-30}},  color={0,0,127}));
-  connect(y, oveBoi.u)
-    annotation (Line(points={{-120,56},{-62,56}},  color={0,0,127}));
   connect(QWat_flow.y, reaHeaBoi.u)
     annotation (Line(points={{64.3,90},{78,90}}, color={0,0,127}));
-  connect(oveBoi.y, chaudiere.y) annotation (Line(points={{-39,56},{-20,56},{
+  connect(y, subCon.u)
+    annotation (Line(points={{-120,56},{-62,56}}, color={0,0,127}));
+  connect(subCon.y, chaudiere.y) annotation (Line(points={{-39,56},{-20,56},{
           -20,8},{-12,8}}, color={0,0,127}));
+  connect(QWat_flow.y, subCon.u_m) annotation (Line(points={{64.3,90},{72,90},{
+          72,80},{-80,80},{-80,62},{-62,62}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-100,-120},{100,100}})),
                                                                      Icon(
         coordinateSystem(extent={{-100,-120},{100,100}}),
