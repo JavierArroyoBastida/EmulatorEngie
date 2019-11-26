@@ -35,11 +35,11 @@ parameter Modelica.SIunits.Volume VWat=1.5E-6*chaudiere.Q_flow_nominal
 //  Modelica.SIunits.Power QWat_flow "Heat transfer from gas into water";
   Modelica.SIunits.Efficiency eta "Boiler efficiency";
 
-  Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare final package Medium
-      = MediumW) annotation (Placement(transformation(rotation=0, extent={{-94,-10},
+  Modelica.Fluid.Interfaces.FluidPort_a port_a(redeclare final package Medium =
+        MediumW) annotation (Placement(transformation(rotation=0, extent={{-94,-10},
             {-114,10}})));
-  Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare final package Medium
-      = MediumW)
+  Modelica.Fluid.Interfaces.FluidPort_b port_b(redeclare final package Medium =
+        MediumW)
     annotation (Placement(transformation(rotation=0, extent={{92,-10},{112,10}})));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort
@@ -66,8 +66,8 @@ parameter Modelica.SIunits.Volume VWat=1.5E-6*chaudiere.Q_flow_nominal
         MediumW)
     annotation (Placement(transformation(extent={{-86,10},{-66,-10}})));
 
-  Buildings.Fluid.Sensors.Temperature        T_retour(redeclare package Medium
-      =        MediumW)                                annotation (
+  Buildings.Fluid.Sensors.Temperature        T_retour(redeclare package Medium =
+               MediumW)                                annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -119,6 +119,11 @@ parameter Modelica.SIunits.Volume VWat=1.5E-6*chaudiere.Q_flow_nominal
       max=8000,
       unit="W"))
     annotation (Placement(transformation(extent={{-60,46},{-40,66}})));
+  IBPSA.Utilities.IO.SignalExchange.Read reaTsup(
+    KPIs=IBPSA.Utilities.IO.SignalExchange.SignalTypes.SignalsForKPIs.None,
+    description="Boiler supply temperature",
+    y(unit="W"))
+    annotation (Placement(transformation(extent={{80,20},{100,40}})));
 equation
 
 //  QFue_flow = chaudiere.QFue_flow;
@@ -169,6 +174,8 @@ equation
           -20,8},{-12,8}}, color={0,0,127}));
   connect(QWat_flow.y, subCon.u_m) annotation (Line(points={{64.3,90},{72,90},{
           72,80},{-80,80},{-80,62},{-62,62}}, color={0,0,127}));
+  connect(T_depart.T, reaTsup.u) annotation (Line(points={{51,16},{64,16},{64,
+          30},{78,30}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(extent={{-100,-120},{100,100}})),
                                                                      Icon(
         coordinateSystem(extent={{-100,-120},{100,100}}),

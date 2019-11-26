@@ -1182,7 +1182,7 @@ public
     T_start=TSup_nominal) annotation (Placement(transformation(
         extent={{-5,-5},{5,5}},
         rotation=0,
-        origin={-99,-139})));
+        origin={-99,-149})));
   Buildings.Fluid.Actuators.Valves.ThreeWayLinear                val_chaudiere(
     redeclare package Medium = MediumW,
     dpValve_nominal=1e-3,
@@ -1194,7 +1194,7 @@ public
     from_dp=false,
     use_inputFilter=false)
                           annotation (Placement(transformation(extent={{-118,
-            -144},{-108,-134}})));
+            -154},{-108,-144}})));
   Buildings.Fluid.Sensors.TemperatureTwoPort temRet(
     redeclare package Medium = MediumW,
     m_flow_nominal=mBoi_flow_nominal,
@@ -1233,7 +1233,7 @@ public
     m_flow_nominal=mBoi_flow_nominal,
     T_nominal=353.15,
     dp_nominal=100)
-    annotation (Placement(transformation(extent={{-150,-150},{-130,-130}})));
+    annotation (Placement(transformation(extent={{-150,-160},{-130,-140}})));
   Modelica.Fluid.Sensors.MassFlowRate massFlowRate(redeclare package Medium =
         MediumW) annotation (Placement(transformation(
         extent={{-4,3},{4,-3}},
@@ -1348,6 +1348,20 @@ public
       max=8000,
       unit="W"))
     annotation (Placement(transformation(extent={{0,-222},{6,-216}})));
+  IBPSA.Utilities.IO.SignalExchange.Subcontroller subConHea(
+    description=
+        "This subcontroller controls the overall heating input to the building modifying the supply temperature to the distribution system",
+    yMax=1,
+    yMin=0,
+    u(min=0,
+      max=10000,
+      unit="W"))
+    "Subcontroller of the heating input to the overall building using the supply temperature to the distribution system"
+    annotation (Placement(transformation(extent={{-112,-128},{-104,-120}})));
+
+  Modelica.Blocks.Sources.RealExpression Qtot(y=reaHeaSal.y + reaHeaRo1.y +
+        reaHeaRo2.y + reaHeaRo3.y + reaHeaBth.y + reaHeaHal.y)
+    annotation (Placement(transformation(extent={{-130,-120},{-118,-110}})));
 equation
   // Heating production
 //  Production_Radiateur_Salon = max(heatFlowSensor_Salon_Conv.Q_flow,0)+max(heatFlowSensor_Salon_Rad.Q_flow,0);
@@ -2008,7 +2022,7 @@ equation
   connect(spl.port_1, temRet.port_b) annotation (Line(points={{-108,-175},{-108,
           -174},{-102,-174}}, color={0,127,255}));
   connect(spl.port_3,val_chaudiere. port_3) annotation (Line(points={{-113,-170},
-          {-113,-144}},                   color={0,127,255}));
+          {-113,-154}},                   color={0,127,255}));
   connect(weaBus.TDryBul,heaCha. TOut) annotation (Line(
       points={{-160,70},{-164,70},{-164,56},{-164,-94},{-140,-94},{-140,-122.8},
           {-130.4,-122.8}},
@@ -2023,14 +2037,14 @@ equation
           -122.8},{-123.9,-122.8},{-123.9,-122.667},{-122.48,-122.667}}, color={
           0,0,127}));
   connect(val_chaudiere.port_2, temSup.port_a) annotation (Line(points={{-108,
-          -139},{-104,-139}},       color={0,127,255}));
+          -149},{-104,-149}},       color={0,127,255}));
   connect(Boiler.port_b, val_chaudiere.port_1) annotation (Line(points={{-129.8,
-          -139.091},{-124,-139.091},{-124,-139},{-118,-139}}, color={0,127,255}));
+          -149.091},{-124,-149.091},{-124,-149},{-118,-149}}, color={0,127,255}));
   connect(spl.port_2, Boiler.port_a) annotation (Line(points={{-118,-175},{-118,
-          -176},{-156,-176},{-156,-139.091},{-150.4,-139.091}},
+          -176},{-156,-176},{-156,-149.091},{-150.4,-149.091}},
         color={0,127,255}));
   connect(temSup.port_b, massFlowRate.port_a) annotation (Line(points={{-94,
-          -139},{-92,-139},{-92,-140},{-91,-140}},
+          -149},{-92,-149},{-92,-140},{-91,-140}},
                                              color={0,127,255}));
   connect(temRet.port_a, pompe_chaudiere.port_b) annotation (Line(points={{-94,
           -174},{-92,-174},{-92,-175},{-88,-175}},
@@ -2038,7 +2052,7 @@ equation
   connect(pompe_chaudiere.port_a, outSplVal1.port_3) annotation (Line(points={{-78,
           -175},{-78,-174},{-47,-174},{-47,-124}},            color={0,127,255}));
   connect(boolean_ModeDHW.y, Boiler.Mode_ECS) annotation (Line(points={{-177.4,
-          -162},{-158,-162},{-158,-146.909},{-152,-146.909}},
+          -162},{-158,-162},{-158,-156.909},{-152,-156.909}},
                                                         color={255,0,255}));
   connect(offHys.y,greaterEqualThreshold. u) annotation (Line(points={{-273.5,-119},
           {-269,-119}},                       color={0,0,127}));
@@ -2074,11 +2088,11 @@ equation
   connect(Meas_T_LivingRoom.y, con_HeaModeBoiler.u_m) annotation (Line(points={{
           -326.1,-247},{-266,-247},{-266,-223.2}}, color={0,0,127}));
   connect(Boiler.T, regul_Chaudiere_Securite.T) annotation (Line(points={{-128.2,
-          -134},{-122,-134},{-122,-130},{-216,-130},{-216,-144},{-336,-144},{
+          -144},{-124,-144},{-124,-138},{-216,-138},{-216,-144},{-336,-144},{
           -336,-182.5},{-308.04,-182.5}},
                                      color={0,0,127}));
-  connect(conPumHea.yHea, pompe_chaudiere.m_flow_in) annotation (Line(points={{
-          -192.4,-209},{-83,-209},{-83,-181}}, color={0,0,127}));
+  connect(conPumHea.yHea, pompe_chaudiere.m_flow_in) annotation (Line(points={{-192.4,
+          -209},{-83,-209},{-83,-181}},        color={0,0,127}));
   connect(Meas_T_LivingRoom.y, onOffController.u) annotation (Line(points={{-326.1,
           -247},{-314,-247},{-314,-238},{-298,-238}}, color={0,0,127}));
   connect(product1.y, switch1.u1) annotation (Line(points={{-217,-176},{-208,-176},
@@ -2097,29 +2111,26 @@ equation
   connect(realExpression17.y, regul_Salon.ConsigneClim) annotation (Line(points=
          {{-73.8,16},{-70,16},{-70,19},{-66.8,19}}, color={0,0,127}));
   connect(switch1.y, Boiler.y) annotation (Line(points={{-239.5,-119},{-184,
-          -119},{-184,-134},{-152,-134}},
+          -119},{-184,-144},{-152,-144}},
                                       color={0,0,127}));
   connect(T_Chambre1.T, regul_Chambre1.T) annotation (Line(points={{6,18},{8,18},
           {8,16},{9.36,16}}, color={0,0,127}));
   connect(HeaSet_LivingRoom.y, onOffController.reference) annotation (Line(
         points={{-328.1,-210},{-306,-210},{-306,-226},{-298,-226}}, color={0,0,127}));
-  connect(HeaSet_LivingRoom.y, conPumHea.ConsigneCh) annotation (Line(points={{
-          -328.1,-210},{-314,-210},{-314,-202},{-226,-202},{-226,-212.333},{
-          -211.28,-212.333}}, color={0,0,127}));
-  connect(conHeaBoiler.yHea, val_chaudiere.y) annotation (Line(points={{-115.4,
-          -124},{-113,-124},{-113,-133}},
-                                    color={0,0,127}));
-  connect(temSup.T, conHeaBoiler.T) annotation (Line(points={{-99,-133.5},{-99,
-          -128},{-124,-128},{-124,-124},{-122.48,-124}},
+  connect(HeaSet_LivingRoom.y, conPumHea.ConsigneCh) annotation (Line(points={{-328.1,
+          -210},{-314,-210},{-314,-202},{-226,-202},{-226,-212.333},{-211.28,
+          -212.333}},         color={0,0,127}));
+  connect(temSup.T, conHeaBoiler.T) annotation (Line(points={{-99,-143.5},{-99,
+          -136},{-98,-136},{-98,-130},{-124,-130},{-124,-124},{-122.48,-124}},
                                                    color={0,0,127}));
   connect(massFlowRate.port_b, inSplVal1.port_1) annotation (Line(points={{-91,
           -132},{-92,-132},{-92,-119},{-88,-119}}, color={0,127,255}));
-  connect(schedules_RT2012_MI.HeaSetRT12, reaTSetHea.u) annotation (Line(points
-        ={{-352,38},{-336,38},{-336,43},{-332.6,43}}, color={0,0,127}));
-  connect(schedules_RT2012_MI.CooSetRT12, reaTSetCoo.u) annotation (Line(points
-        ={{-352,34.6},{-346,34.6},{-346,33},{-332.6,33}}, color={0,0,127}));
+  connect(schedules_RT2012_MI.HeaSetRT12, reaTSetHea.u) annotation (Line(points=
+         {{-352,38},{-336,38},{-336,43},{-332.6,43}}, color={0,0,127}));
+  connect(schedules_RT2012_MI.CooSetRT12, reaTSetCoo.u) annotation (Line(points=
+         {{-352,34.6},{-346,34.6},{-346,33},{-332.6,33}}, color={0,0,127}));
   connect(conPumHea.yHea, Boiler.m_PompeCirc) annotation (Line(points={{-192.4,
-          -209},{-162,-209},{-162,-144},{-152,-144},{-152,-143.636}}, color={0,
+          -209},{-162,-209},{-162,-154},{-152,-154},{-152,-153.636}}, color={0,
           0,127}));
   connect(realExpression13.y, reaHeaSal.u)
     annotation (Line(points={{-77.7,-145},{-70.6,-145}}, color={0,0,127}));
@@ -2167,6 +2178,12 @@ equation
           {-6,-227},{-6,-217.2},{-0.6,-217.2}}, color={0,0,127}));
   connect(subConHeaBth.y, val_SDB.y)
     annotation (Line(points={{6.3,-219},{9,-219},{9,-209}}, color={0,0,127}));
+  connect(conHeaBoiler.yHea, subConHea.u)
+    annotation (Line(points={{-115.4,-124},{-112.8,-124}}, color={0,0,127}));
+  connect(subConHea.y, val_chaudiere.y) annotation (Line(points={{-103.6,-124},
+          {-102,-124},{-102,-138},{-113,-138},{-113,-143}}, color={0,0,127}));
+  connect(Qtot.y, subConHea.u_m) annotation (Line(points={{-117.4,-115},{-116,
+          -115},{-116,-121.6},{-112.8,-121.6}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-380,-260},
             {100,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-380,-260},{100,100}}),

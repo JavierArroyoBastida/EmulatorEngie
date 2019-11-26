@@ -4,13 +4,13 @@ model wrapped "Wrapped model"
 	Modelica.Blocks.Interfaces.BooleanInput regul_SDB_oveTsetCoo_activate "Activation for Zone temperature setpoint for cooling";
 	Modelica.Blocks.Interfaces.RealInput conHeaBth_oveTsetHea_u(unit="K", min=283.15, max=303.15) "Zone temperature setpoint for heating";
 	Modelica.Blocks.Interfaces.BooleanInput conHeaBth_oveTsetHea_activate "Activation for Zone temperature setpoint for heating";
-	Modelica.Blocks.Interfaces.RealInput conHeaRo1_oveActHea_u(unit="1", min=0.0, max=1.0) "Actuator signal for heating";
+	Modelica.Blocks.Interfaces.RealInput conHeaRo1_oveActHea_u(unit="1", min=0.0, max=100.0) "Actuator signal for heating";
 	Modelica.Blocks.Interfaces.BooleanInput conHeaRo1_oveActHea_activate "Activation for Actuator signal for heating";
-	Modelica.Blocks.Interfaces.RealInput conHeaRo3_oveActHea_u(unit="1", min=0.0, max=1.0) "Actuator signal for heating";
+	Modelica.Blocks.Interfaces.RealInput conHeaRo3_oveActHea_u(unit="1", min=0.0, max=100.0) "Actuator signal for heating";
 	Modelica.Blocks.Interfaces.BooleanInput conHeaRo3_oveActHea_activate "Activation for Actuator signal for heating";
-	Modelica.Blocks.Interfaces.RealInput conPumHea_oveActHea_u(unit="1", min=0.0, max=1.0) "Actuator signal for heating";
+	Modelica.Blocks.Interfaces.RealInput conPumHea_oveActHea_u(unit="1", min=0.0, max=100.0) "Actuator signal for heating";
 	Modelica.Blocks.Interfaces.BooleanInput conPumHea_oveActHea_activate "Activation for Actuator signal for heating";
-	Modelica.Blocks.Interfaces.RealInput regul_Chaudiere_Securite_oveActHea_u(unit="1", min=0.0, max=1.0) "Actuator signal for heating";
+	Modelica.Blocks.Interfaces.RealInput regul_Chaudiere_Securite_oveActHea_u(unit="1", min=0.0, max=100.0) "Actuator signal for heating";
 	Modelica.Blocks.Interfaces.BooleanInput regul_Chaudiere_Securite_oveActHea_activate "Activation for Actuator signal for heating";
 	Modelica.Blocks.Interfaces.RealInput regul_Chaudiere_Securite_oveTsetHea_u(unit="K", min=283.15, max=368.15) "Zone temperature setpoint for heating";
 	Modelica.Blocks.Interfaces.BooleanInput regul_Chaudiere_Securite_oveTsetHea_activate "Activation for Zone temperature setpoint for heating";
@@ -42,7 +42,7 @@ model wrapped "Wrapped model"
 	Modelica.Blocks.Interfaces.BooleanInput regul_SDB_ovePCoo_activate "Activation for Precribed cooling power";
 	Modelica.Blocks.Interfaces.RealInput conHeaRo1_oveTsetHea_u(unit="K", min=283.15, max=303.15) "Zone temperature setpoint for heating";
 	Modelica.Blocks.Interfaces.BooleanInput conHeaRo1_oveTsetHea_activate "Activation for Zone temperature setpoint for heating";
-	Modelica.Blocks.Interfaces.RealInput conHeaBoiler_oveActHea_u(unit="1", min=0.0, max=1.0) "Actuator signal for heating";
+	Modelica.Blocks.Interfaces.RealInput conHeaBoiler_oveActHea_u(unit="1", min=0.0, max=100.0) "Actuator signal for heating";
 	Modelica.Blocks.Interfaces.BooleanInput conHeaBoiler_oveActHea_activate "Activation for Actuator signal for heating";
 	Modelica.Blocks.Interfaces.RealInput subConHeaBth_u(unit="W", min=0.0, max=8000.0) "Heating released from the radiation to the room bathroom";
 	Modelica.Blocks.Interfaces.BooleanInput subConHeaBth_activate "Activation for Heating released from the radiation to the room bathroom";
@@ -50,13 +50,15 @@ model wrapped "Wrapped model"
 	Modelica.Blocks.Interfaces.BooleanInput regul_Couloir_ovePCoo_activate "Activation for Precribed cooling power";
 	Modelica.Blocks.Interfaces.RealInput regul_Chambre1_ovePCoo_u(unit="W", min=-10000.0, max=0.0) "Precribed cooling power";
 	Modelica.Blocks.Interfaces.BooleanInput regul_Chambre1_ovePCoo_activate "Activation for Precribed cooling power";
-	Modelica.Blocks.Interfaces.RealInput conHeaRo2_oveActHea_u(unit="1", min=0.0, max=1.0) "Actuator signal for heating";
+	Modelica.Blocks.Interfaces.RealInput conHeaRo2_oveActHea_u(unit="1", min=0.0, max=100.0) "Actuator signal for heating";
 	Modelica.Blocks.Interfaces.BooleanInput conHeaRo2_oveActHea_activate "Activation for Actuator signal for heating";
+	Modelica.Blocks.Interfaces.RealInput subConHea_u(unit="W", min=0.0, max=10000.0) "This subcontroller controls the overall heating input to the building modifying the supply temperature to the distribution system";
+	Modelica.Blocks.Interfaces.BooleanInput subConHea_activate "Activation for This subcontroller controls the overall heating input to the building modifying the supply temperature to the distribution system";
 	Modelica.Blocks.Interfaces.RealInput subConHeaSal_u(unit="W", min=0.0, max=8000.0) "Heating released from the radiation to the salon";
 	Modelica.Blocks.Interfaces.BooleanInput subConHeaSal_activate "Activation for Heating released from the radiation to the salon";
 	Modelica.Blocks.Interfaces.RealInput Boiler_subCon_u(unit="W", min=0.0, max=8000.0) "Heating released from the boiler to the distribution fluid";
 	Modelica.Blocks.Interfaces.BooleanInput Boiler_subCon_activate "Activation for Heating released from the boiler to the distribution fluid";
-	Modelica.Blocks.Interfaces.RealInput conHeaSal_oveActHea_u(unit="1", min=0.0, max=1.0) "Actuator signal for heating";
+	Modelica.Blocks.Interfaces.RealInput conHeaSal_oveActHea_u(unit="1", min=0.0, max=100.0) "Actuator signal for heating";
 	Modelica.Blocks.Interfaces.BooleanInput conHeaSal_oveActHea_activate "Activation for Actuator signal for heating";
 	Modelica.Blocks.Interfaces.RealInput regul_Chambre2_oveTsetCoo_u(unit="K", min=283.15, max=303.15) "Zone temperature setpoint for cooling";
 	Modelica.Blocks.Interfaces.BooleanInput regul_Chambre2_oveTsetCoo_activate "Activation for Zone temperature setpoint for cooling";
@@ -66,7 +68,7 @@ model wrapped "Wrapped model"
 	Modelica.Blocks.Interfaces.BooleanInput conHeaRo3_oveTsetHea_activate "Activation for Zone temperature setpoint for heating";
 	Modelica.Blocks.Interfaces.RealInput conHeaRo2_oveTsetHea_u(unit="K", min=283.15, max=303.15) "Zone temperature setpoint for heating";
 	Modelica.Blocks.Interfaces.BooleanInput conHeaRo2_oveTsetHea_activate "Activation for Zone temperature setpoint for heating";
-	Modelica.Blocks.Interfaces.RealInput conHeaBth_oveActHea_u(unit="1", min=0.0, max=1.0) "Actuator signal for heating";
+	Modelica.Blocks.Interfaces.RealInput conHeaBth_oveActHea_u(unit="1", min=0.0, max=100.0) "Actuator signal for heating";
 	Modelica.Blocks.Interfaces.BooleanInput conHeaBth_oveActHea_activate "Activation for Actuator signal for heating";
 	// Out read
 	Modelica.Blocks.Interfaces.RealOutput Salon_heaGai_reaTot_y(unit="W") = mod.Salon.heaGai.reaTot.y "Total internal gains";
@@ -80,6 +82,7 @@ model wrapped "Wrapped model"
 	Modelica.Blocks.Interfaces.RealOutput Garage_heaGai_reaCon_y(unit="W") = mod.Garage.heaGai.reaCon.y "Convective internal gains";
 	Modelica.Blocks.Interfaces.RealOutput conHeaRo3_reaTzon_y(unit="K") = mod.conHeaRo3.reaTzon.y "Zone temperature";
 	Modelica.Blocks.Interfaces.RealOutput reaHeaHal_y(unit="W") = mod.reaHeaHal.y "Read heating delivered to Hall";
+	Modelica.Blocks.Interfaces.RealOutput subConHeaRo2_read_y(unit="1") = mod.subConHeaRo2.read.y "";
 	Modelica.Blocks.Interfaces.RealOutput conHeaSal_reaTzon_y(unit="K") = mod.conHeaSal.reaTzon.y "Zone temperature";
 	Modelica.Blocks.Interfaces.RealOutput SDB_heaGai_reaCon_y(unit="W") = mod.SDB.heaGai.reaCon.y "Convective internal gains";
 	Modelica.Blocks.Interfaces.RealOutput Salon_heaGai_reaCon_y(unit="W") = mod.Salon.heaGai.reaCon.y "Convective internal gains";
@@ -94,9 +97,13 @@ model wrapped "Wrapped model"
 	Modelica.Blocks.Interfaces.RealOutput reaHeaRo3_y(unit="W") = mod.reaHeaRo3.y "Read heating delivered to room 3";
 	Modelica.Blocks.Interfaces.RealOutput Chambre1_heaGai_reaRad_y(unit="W") = mod.Chambre1.heaGai.reaRad.y "Radiative internal gains";
 	Modelica.Blocks.Interfaces.RealOutput Couloir_heaGai_reaCon_y(unit="W") = mod.Couloir.heaGai.reaCon.y "Convective internal gains";
+	Modelica.Blocks.Interfaces.RealOutput subConHea_read_y(unit="1") = mod.subConHea.read.y "";
 	Modelica.Blocks.Interfaces.RealOutput Chambre3_heaGai_reaLat_y(unit="W") = mod.Chambre3.heaGai.reaLat.y "Latent internal gains";
 	Modelica.Blocks.Interfaces.RealOutput Couloir_heaGai_reaLat_y(unit="W") = mod.Couloir.heaGai.reaLat.y "Latent internal gains";
 	Modelica.Blocks.Interfaces.RealOutput q_conv_Nuit_reaConOcc_y(unit="W/m2") = mod.q_conv_Nuit.reaConOcc.y "Convective heat gains";
+	Modelica.Blocks.Interfaces.RealOutput Boiler_subCon_read_y(unit="1") = mod.Boiler.subCon.read.y "";
+	Modelica.Blocks.Interfaces.RealOutput subConHeaRo1_read_y(unit="1") = mod.subConHeaRo1.read.y "";
+	Modelica.Blocks.Interfaces.RealOutput regul_Salon_reaPcoo_y(unit="W") = mod.regul_Salon.reaPcoo.y "Cooling electrical power consumption";
 	Modelica.Blocks.Interfaces.RealOutput conHeaBth_reaTzon_y(unit="K") = mod.conHeaBth.reaTzon.y "Zone temperature";
 	Modelica.Blocks.Interfaces.RealOutput Garage_heaGai_reaTot_y(unit="W") = mod.Garage.heaGai.reaTot.y "Total internal gains";
 	Modelica.Blocks.Interfaces.RealOutput Combles_heaGai_reaCon_y(unit="W") = mod.Combles.heaGai.reaCon.y "Convective internal gains";
@@ -111,10 +118,12 @@ model wrapped "Wrapped model"
 	Modelica.Blocks.Interfaces.RealOutput Boiler_reaHeaBoi_y(unit="W") = mod.Boiler.reaHeaBoi.y "Boiler thermal energy usage";
 	Modelica.Blocks.Interfaces.RealOutput Chambre1_heaGai_reaTot_y(unit="W") = mod.Chambre1.heaGai.reaTot.y "Total internal gains";
 	Modelica.Blocks.Interfaces.RealOutput ventil_Salon_rearelHum_y(unit="1") = mod.ventil_Salon.rearelHum.y "Zone relative humidity";
+	Modelica.Blocks.Interfaces.RealOutput subConHeaSal_read_y(unit="1") = mod.subConHeaSal.read.y "";
 	Modelica.Blocks.Interfaces.RealOutput regul_Chambre3_reaPcoo_y(unit="W") = mod.regul_Chambre3.reaPcoo.y "Cooling electrical power consumption";
 	Modelica.Blocks.Interfaces.RealOutput regul_Chambre2_reaPcoo_y(unit="W") = mod.regul_Chambre2.reaPcoo.y "Cooling electrical power consumption";
 	Modelica.Blocks.Interfaces.RealOutput Combles_heaGai_reaTot_y(unit="W") = mod.Combles.heaGai.reaTot.y "Total internal gains";
 	Modelica.Blocks.Interfaces.RealOutput Boiler_reaPpum_y(unit="W") = mod.Boiler.reaPpum.y "Boiler pump electrical power consumption";
+	Modelica.Blocks.Interfaces.RealOutput subConHeaRo3_read_y(unit="1") = mod.subConHeaRo3.read.y "";
 	Modelica.Blocks.Interfaces.RealOutput Chambre1_heaGai_reaLat_y(unit="W") = mod.Chambre1.heaGai.reaLat.y "Latent internal gains";
 	Modelica.Blocks.Interfaces.RealOutput Combles_heaGai_reaRad_y(unit="W") = mod.Combles.heaGai.reaRad.y "Radiative internal gains";
 	Modelica.Blocks.Interfaces.RealOutput Garage_heaGai_reaLat_y(unit="W") = mod.Garage.heaGai.reaLat.y "Latent internal gains";
@@ -124,8 +133,9 @@ model wrapped "Wrapped model"
 	Modelica.Blocks.Interfaces.RealOutput Chambre2_heaGai_reaTot_y(unit="W") = mod.Chambre2.heaGai.reaTot.y "Total internal gains";
 	Modelica.Blocks.Interfaces.RealOutput reaTHal_y(unit="K") = mod.reaTHal.y "Read hall temperature";
 	Modelica.Blocks.Interfaces.RealOutput Chambre2_heaGai_reaLat_y(unit="W") = mod.Chambre2.heaGai.reaLat.y "Latent internal gains";
-	Modelica.Blocks.Interfaces.RealOutput regul_Salon_reaPcoo_y(unit="W") = mod.regul_Salon.reaPcoo.y "Cooling electrical power consumption";
+	Modelica.Blocks.Interfaces.RealOutput Boiler_reaTsup_y(unit="W") = mod.Boiler.reaTsup.y "Boiler supply temperature";
 	Modelica.Blocks.Interfaces.RealOutput Chambre3_heaGai_reaTot_y(unit="W") = mod.Chambre3.heaGai.reaTot.y "Total internal gains";
+	Modelica.Blocks.Interfaces.RealOutput subConHeaBth_read_y(unit="1") = mod.subConHeaBth.read.y "";
 	// Original model
 	DetachedHouse_ENGIE_IBPSAP1.DetachedHouse_ENGIE_IBPSAP1_BOPTEST_v3 mod(
 		regul_SDB.oveTsetCoo(uExt(y=regul_SDB_oveTsetCoo_u),activate(y=regul_SDB_oveTsetCoo_activate)),
@@ -154,6 +164,7 @@ model wrapped "Wrapped model"
 		regul_Couloir.ovePCoo(uExt(y=regul_Couloir_ovePCoo_u),activate(y=regul_Couloir_ovePCoo_activate)),
 		regul_Chambre1.ovePCoo(uExt(y=regul_Chambre1_ovePCoo_u),activate(y=regul_Chambre1_ovePCoo_activate)),
 		conHeaRo2.oveActHea(uExt(y=conHeaRo2_oveActHea_u),activate(y=conHeaRo2_oveActHea_activate)),
+		subConHea(uExt(y=subConHea_u),activate(y=subConHea_activate)),
 		subConHeaSal(uExt(y=subConHeaSal_u),activate(y=subConHeaSal_activate)),
 		Boiler.subCon(uExt(y=Boiler_subCon_u),activate(y=Boiler_subCon_activate)),
 		conHeaSal.oveActHea(uExt(y=conHeaSal_oveActHea_u),activate(y=conHeaSal_oveActHea_activate)),
