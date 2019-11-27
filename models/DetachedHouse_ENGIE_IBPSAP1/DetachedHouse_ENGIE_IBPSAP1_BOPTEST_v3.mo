@@ -1218,12 +1218,12 @@ public
     TSup_nominal=TSup_nominal,
     TRet_nominal=TRet_nominal,
     TOut_nominal(displayUnit="degC") = 268.15)
-    annotation (Placement(transformation(extent={{-130,-126},{-126,-122}})));
+    annotation (Placement(transformation(extent={{-132,-128},{-126,-122}})));
   Building.Control.ConHea conHeaBoiler(Khea=1)
     annotation (Placement(transformation(extent={{-122,-126},{-116,-122}})));
   Modelica.Blocks.Sources.RealExpression realExpression29(y=schedules_RT2012_MI.HeaSetRT12
          + delta_ST_rad)
-    annotation (Placement(transformation(extent={{-150,-128},{-144,-122}})));
+    annotation (Placement(transformation(extent={{-146,-134},{-138,-126}})));
   Building.Equipement.Heating.chaudiere_2 Boiler(
     effCur=Buildings.Fluid.Types.EfficiencyCurves.Polynomial,
     a={1.191,-0.214,0,0,0,0},
@@ -1348,12 +1348,14 @@ public
       max=8000,
       unit="W"))
     annotation (Placement(transformation(extent={{0,-222},{6,-216}})));
-  IBPSA.Utilities.IO.SignalExchange.Subcontroller subConHea(
+  IBPSA.Utilities.IO.SignalExchange.Subcontroller subConHeaTot(
     description=
         "This subcontroller controls the overall heating input to the building modifying the supply temperature to the distribution system",
+
     yMax=1,
     yMin=0,
-    u(min=0,
+    u(
+      min=0,
       max=10000,
       unit="W"))
     "Subcontroller of the heating input to the overall building using the supply temperature to the distribution system"
@@ -1361,7 +1363,16 @@ public
 
   Modelica.Blocks.Sources.RealExpression Qtot(y=reaHeaSal.y + reaHeaRo1.y +
         reaHeaRo2.y + reaHeaRo3.y + reaHeaBth.y + reaHeaHal.y)
-    annotation (Placement(transformation(extent={{-130,-120},{-118,-110}})));
+    annotation (Placement(transformation(extent={{-138,-118},{-126,-108}})));
+  IBPSA.Utilities.IO.SignalExchange.Read reaHeaTot(description=
+        "Total heating delivered to the building", y(unit="W"))
+    annotation (Placement(transformation(extent={{-122,-116},{-116,-110}})));
+  IBPSA.Utilities.IO.SignalExchange.Read Tsup(description=
+        "Supply temperature to the building", y(unit="K"))
+    annotation (Placement(transformation(extent={{-96,-116},{-90,-110}})));
+  IBPSA.Utilities.IO.SignalExchange.Read Tret(description=
+        "Return temperature from the building", y(unit="K"))
+    annotation (Placement(transformation(extent={{-88,-164},{-82,-158}})));
 equation
   // Heating production
 //  Production_Radiateur_Salon = max(heatFlowSensor_Salon_Conv.Q_flow,0)+max(heatFlowSensor_Salon_Rad.Q_flow,0);
@@ -2024,17 +2035,15 @@ equation
   connect(spl.port_3,val_chaudiere. port_3) annotation (Line(points={{-113,-170},
           {-113,-154}},                   color={0,127,255}));
   connect(weaBus.TDryBul,heaCha. TOut) annotation (Line(
-      points={{-160,70},{-164,70},{-164,56},{-164,-94},{-140,-94},{-140,-122.8},
-          {-130.4,-122.8}},
+      points={{-160,70},{-164,70},{-164,-94},{-140,-94},{-140,-123.2},{-132.6,
+          -123.2}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}}));
-  connect(realExpression29.y,heaCha. TRoo_in) annotation (Line(points={{-143.7,-125},
-          {-131.85,-125},{-131.85,-125.2},{-130.38,-125.2}}, color={0,0,127}));
-  connect(heaCha.TSup, conHeaBoiler.ConsigneCh) annotation (Line(points={{-125.8,
-          -122.8},{-123.9,-122.8},{-123.9,-122.667},{-122.48,-122.667}}, color={
+  connect(heaCha.TSup, conHeaBoiler.ConsigneCh) annotation (Line(points={{-125.7,
+          -123.2},{-123.9,-123.2},{-123.9,-122.667},{-122.48,-122.667}}, color={
           0,0,127}));
   connect(val_chaudiere.port_2, temSup.port_a) annotation (Line(points={{-108,
           -149},{-104,-149}},       color={0,127,255}));
@@ -2178,12 +2187,22 @@ equation
           {-6,-227},{-6,-217.2},{-0.6,-217.2}}, color={0,0,127}));
   connect(subConHeaBth.y, val_SDB.y)
     annotation (Line(points={{6.3,-219},{9,-219},{9,-209}}, color={0,0,127}));
-  connect(conHeaBoiler.yHea, subConHea.u)
+  connect(conHeaBoiler.yHea, subConHeaTot.u)
     annotation (Line(points={{-115.4,-124},{-112.8,-124}}, color={0,0,127}));
-  connect(subConHea.y, val_chaudiere.y) annotation (Line(points={{-103.6,-124},
-          {-102,-124},{-102,-138},{-113,-138},{-113,-143}}, color={0,0,127}));
-  connect(Qtot.y, subConHea.u_m) annotation (Line(points={{-117.4,-115},{-116,
-          -115},{-116,-121.6},{-112.8,-121.6}}, color={0,0,127}));
+  connect(subConHeaTot.y, val_chaudiere.y) annotation (Line(points={{-103.6,
+          -124},{-102,-124},{-102,-138},{-113,-138},{-113,-143}}, color={0,0,
+          127}));
+  connect(Qtot.y, reaHeaTot.u)
+    annotation (Line(points={{-125.4,-113},{-122.6,-113}}, color={0,0,127}));
+  connect(reaHeaTot.y, subConHeaTot.u_m) annotation (Line(points={{-115.7,-113},
+          {-114,-113},{-114,-121.6},{-112.8,-121.6}}, color={0,0,127}));
+  connect(realExpression29.y, heaCha.TRoo_in) annotation (Line(points={{-137.6,
+          -130},{-134.85,-130},{-134.85,-126.8},{-132.57,-126.8}}, color={0,0,
+          127}));
+  connect(temSup.T, Tsup.u) annotation (Line(points={{-99,-143.5},{-99,-113},{
+          -96.6,-113}}, color={0,0,127}));
+  connect(temRet.T, Tret.u) annotation (Line(points={{-98,-169.6},{-98,-161},{
+          -88.6,-161}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-380,-260},
             {100,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-380,-260},{100,100}}),
