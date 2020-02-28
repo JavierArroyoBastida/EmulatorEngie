@@ -80,11 +80,9 @@ model wrapped "Wrapped model"
 	Modelica.Blocks.Interfaces.RealOutput Garage_heaGai_reaCon_y(unit="W") = mod.Garage.heaGai.reaCon.y "Convective internal gains";
 	Modelica.Blocks.Interfaces.RealOutput conHeaRo3_reaTzon_y(unit="K") = mod.conHeaRo3.reaTzon.y "Zone temperature";
 	Modelica.Blocks.Interfaces.RealOutput reaHeaHal_y(unit="W") = mod.reaHeaHal.y "Read heating delivered to Hall";
-	Modelica.Blocks.Interfaces.RealOutput subConHeaRo2_read_y(unit="1") = mod.subConHeaRo2.read.y "";
 	Modelica.Blocks.Interfaces.RealOutput conHeaSal_reaTzon_y(unit="K") = mod.conHeaSal.reaTzon.y "Zone temperature";
 	Modelica.Blocks.Interfaces.RealOutput SDB_heaGai_reaCon_y(unit="W") = mod.SDB.heaGai.reaCon.y "Convective internal gains";
 	Modelica.Blocks.Interfaces.RealOutput Salon_heaGai_reaCon_y(unit="W") = mod.Salon.heaGai.reaCon.y "Convective internal gains";
-	Modelica.Blocks.Interfaces.RealOutput subConHeaTot_read_y(unit="1") = mod.subConHeaTot.read.y "";
 	Modelica.Blocks.Interfaces.RealOutput ventil_Salon_rearelHum_y(unit="1") = mod.ventil_Salon.rearelHum.y "Zone relative humidity";
 	Modelica.Blocks.Interfaces.RealOutput Chambre2_heaGai_reaRad_y(unit="W") = mod.Chambre2.heaGai.reaRad.y "Radiative internal gains";
 	Modelica.Blocks.Interfaces.RealOutput SDB_heaGai_reaLat_y(unit="W") = mod.SDB.heaGai.reaLat.y "Latent internal gains";
@@ -103,7 +101,6 @@ model wrapped "Wrapped model"
 	Modelica.Blocks.Interfaces.RealOutput Tsup_y(unit="K") = mod.Tsup.y "Supply temperature to the building";
 	Modelica.Blocks.Interfaces.RealOutput Couloir_heaGai_reaLat_y(unit="W") = mod.Couloir.heaGai.reaLat.y "Latent internal gains";
 	Modelica.Blocks.Interfaces.RealOutput q_conv_Nuit_reaConOcc_y(unit="W/m2") = mod.q_conv_Nuit.reaConOcc.y "Convective heat gains";
-	Modelica.Blocks.Interfaces.RealOutput subConHeaRo1_read_y(unit="1") = mod.subConHeaRo1.read.y "";
 	Modelica.Blocks.Interfaces.RealOutput regul_Salon_reaPcoo_y(unit="W") = mod.regul_Salon.reaPcoo.y "Cooling electrical power consumption";
 	Modelica.Blocks.Interfaces.RealOutput conHeaBth_reaTzon_y(unit="K") = mod.conHeaBth.reaTzon.y "Zone temperature";
 	Modelica.Blocks.Interfaces.RealOutput Garage_heaGai_reaTot_y(unit="W") = mod.Garage.heaGai.reaTot.y "Total internal gains";
@@ -119,12 +116,10 @@ model wrapped "Wrapped model"
 	Modelica.Blocks.Interfaces.RealOutput Boiler_reaHeaBoi_y(unit="W") = mod.Boiler.reaHeaBoi.y "Boiler thermal energy usage";
 	Modelica.Blocks.Interfaces.RealOutput Chambre1_heaGai_reaTot_y(unit="W") = mod.Chambre1.heaGai.reaTot.y "Total internal gains";
 	Modelica.Blocks.Interfaces.RealOutput Tret_y(unit="K") = mod.Tret.y "Return temperature from the building";
-	Modelica.Blocks.Interfaces.RealOutput subConHeaSal_read_y(unit="1") = mod.subConHeaSal.read.y "";
 	Modelica.Blocks.Interfaces.RealOutput regul_Chambre3_reaPcoo_y(unit="W") = mod.regul_Chambre3.reaPcoo.y "Cooling electrical power consumption";
 	Modelica.Blocks.Interfaces.RealOutput regul_Chambre2_reaPcoo_y(unit="W") = mod.regul_Chambre2.reaPcoo.y "Cooling electrical power consumption";
 	Modelica.Blocks.Interfaces.RealOutput Combles_heaGai_reaTot_y(unit="W") = mod.Combles.heaGai.reaTot.y "Total internal gains";
 	Modelica.Blocks.Interfaces.RealOutput Boiler_reaPpum_y(unit="W") = mod.Boiler.reaPpum.y "Boiler pump electrical power consumption";
-	Modelica.Blocks.Interfaces.RealOutput subConHeaRo3_read_y(unit="1") = mod.subConHeaRo3.read.y "";
 	Modelica.Blocks.Interfaces.RealOutput Chambre1_heaGai_reaLat_y(unit="W") = mod.Chambre1.heaGai.reaLat.y "Latent internal gains";
 	Modelica.Blocks.Interfaces.RealOutput Combles_heaGai_reaRad_y(unit="W") = mod.Combles.heaGai.reaRad.y "Radiative internal gains";
 	Modelica.Blocks.Interfaces.RealOutput Garage_heaGai_reaLat_y(unit="W") = mod.Garage.heaGai.reaLat.y "Latent internal gains";
@@ -136,7 +131,6 @@ model wrapped "Wrapped model"
 	Modelica.Blocks.Interfaces.RealOutput Chambre2_heaGai_reaLat_y(unit="W") = mod.Chambre2.heaGai.reaLat.y "Latent internal gains";
 	Modelica.Blocks.Interfaces.RealOutput Boiler_reaTsup_y(unit="K") = mod.Boiler.reaTsup.y "Boiler supply temperature";
 	Modelica.Blocks.Interfaces.RealOutput Chambre3_heaGai_reaTot_y(unit="W") = mod.Chambre3.heaGai.reaTot.y "Total internal gains";
-	Modelica.Blocks.Interfaces.RealOutput subConHeaBth_read_y(unit="1") = mod.subConHeaBth.read.y "";
 	// Original model
 	DetachedHouse_ENGIE_IBPSAP1.DetachedHouse_ENGIE_IBPSAP1_BOPTEST_v3 mod(
 		regul_SDB.oveTsetCoo(uExt(y=regul_SDB_oveTsetCoo_u),activate(y=regul_SDB_oveTsetCoo_activate)),
